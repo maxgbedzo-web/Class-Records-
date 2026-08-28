@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Learner Records</title>
+<meta name="description" content="Offline-first learner records for teachers." />
+<meta name="theme-color" content="#2F5233" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<div id="app">
+  <div class="sync-banner" id="syncBanner">
+    <span class="sync-banner__dot"></span>
+    <span id="syncBannerText">Offline — changes will sync when you're back online</span>
+  </div>
+  <div id="screen"></div>
+</div>
+
+<div id="sheetRoot"></div>
+
+<script type="module" src="js/app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('service-worker.js').catch(() => {
+        // App still works without the service worker; it just won't cache for offline boot.
+      });
+    });
+  }
+</script>
+</body>
+</html>
